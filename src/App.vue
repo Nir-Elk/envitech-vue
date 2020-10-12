@@ -1,28 +1,75 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="page-container">
+    <md-app>
+      <md-app-toolbar>
+        <Header />
+      </md-app-toolbar>
+      <md-app-content class='full-height'>
+        <MainContent />
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Legends from './assets/Legends.json';
+import Header from "@/components/Header";
+import MainContent from "@/components/MainContent";
+import {mapActions} from 'vuex';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Header,
+    MainContent,
+  },
+  methods: {...mapActions(["fetchData"])},
+  created() {
+    this.fetchData(Legends);
+  },
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+body {
+  height: 100%;
+  overflow: hidden;
 }
+
+.md-app,
+.page-container {
+  height: 100%;
+}
+
+.text {
+  font-family: "Roboto", sans-serif !important;
+  color: darkslategray;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inherit-width {
+  width: inherit;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+
+
 </style>
